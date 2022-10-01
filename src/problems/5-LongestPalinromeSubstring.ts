@@ -15,38 +15,31 @@
 // TODO re-use previous substrings
 
 function longestPalindrome(s: string): string | undefined {
-  let palindromes: string[] = [];
+  if (s.length === 1) return s;
 
+  let start = 0;
+  let end = 0;
   for(let i = 0; i < s.length; i++) {
-    for (let j = i + 1; j <= s.length; j++) {
-        const substr = s.substring(i, j);
-        isPalindrome(substr) && palindromes.push(substr);
-      }
+    const lengthOdd = isPalindrome(s, i, i);
+    const lengthEven = isPalindrome(s, i, i + 1);
+    const longerLength = Math.max(lengthEven, lengthOdd);
+    if (longerLength > end - start) {
+      start = i - Math.floor((longerLength - 1)/ 2);
+      end = i + Math.floor(longerLength / 2) + 1;
     }
+  }
+  return s.substring(start, end);
   
-  if (palindromes.length > 0) {
-    const largest = palindromes.reduce((prev, curr) => (
-      curr.length > prev.length
-        ? curr
-        : prev
-    ))
-    return largest;
-  }
-  return;
 }
 
-function isPalindrome(s: string): boolean {
-  if (s.length === 1) return true;
-
-  for(let i = 0; i < Math.floor(s.length / 2); i++) {
-    if (s[i] !== s[s.length - 1 - i]) {
-      return false;
-    }
+function isPalindrome(s: string, l: number, r: number): number {
+  while (l >= 0 && r < s.length && s[l] === s[r]) {
+    l--; r++;
   }
-  return true;
+  return r - l - 1;
 }
 
-let s: string = "a"
+let s: string = "abacusabba"
 // console.log(``, isPalindrome('kadak'))
 
 console.log(longestPalindrome(s))

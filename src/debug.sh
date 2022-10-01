@@ -12,6 +12,7 @@ case "$1" in
 
   echo Executing $str.js ...
   node $str.js
+  rm $str.js
   ;;
 
 *) # no str?
