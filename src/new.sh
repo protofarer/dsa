@@ -3,15 +3,18 @@
 SEQ="$1"
 NAME="$2"
 FILENAME="$SEQ-$NAME"
+LOWERFIRSTCHAR_FILENAME=`sed 's/\(.\)/\L\1/' <<< "$NAME"`
+
 PATH_PROB="problems"
 PATH_TEST="__tests__"
 PATH_PROBFILE="$PATH_PROB/$FILENAME.ts"
 PATH_TESTFILE="$PATH_TEST/$FILENAME.test.ts"
 
+
 case "$1" in
 ?*)
   cat > "$PATH_PROBFILE" <<EOF
-  export default function $NAME() {
+  export default function $LOWERFIRSTCHAR_FILENAME() {
   }
 EOF
   echo Created ~/src/$PATH_PROBFILE...
