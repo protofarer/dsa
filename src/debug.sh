@@ -1,8 +1,7 @@
 #!/bin/sh
 
-# run this from day1 folder!!
+# run this from ~/src !
 str="$1"
-# root="~/courses/LastAlgorithmsCourse/kata-machine/src/day1/"
 
 case "$1" in
 ?*)

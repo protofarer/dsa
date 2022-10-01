@@ -1,2 +1,0 @@
-- [ ] set ts build output dir
-- [ ] can debug script run faster? (slow compile step)
