@@ -3,20 +3,21 @@
 SEQ="$1"
 NAME="$2"
 FILENAME="$SEQ-$NAME"
-
 PATH_PROB="problems"
 PATH_TEST="__tests__"
+PATH_PROBFILE="$PATH_PROB/$FILENAME.ts"
+PATH_TESTFILE="$PATH_TEST/$FILENAME.test.ts"
 
 case "$1" in
 ?*)
-  cat > $PATH_PROB/$FILENAME.ts <<EOF
+  cat > "$PATH_PROBFILE" <<EOF
   export default function $NAME() {
   }
 EOF
-  echo Created ~/src/$PATH_PROB/$FILENAME.ts ...
+  echo Created ~/src/$PATH_PROBFILE...
 
-  cat > "$PATH_TEST/$FILENAME.test.ts" <<EOF
-  import f from "../$PATH_PROB/$FILENAME.ts";
+  cat > "$PATH_TESTFILE" <<EOF
+  import f from "../$PATH_PROBFILE";
 
   describe("main", () => {
     it("core", () => {
@@ -24,8 +25,10 @@ EOF
     });
   });
 EOF
+  echo Created ~/src/$PATH_TESTFILE...
 
-  echo Created ~/src/$PATH_TEST/$FILENAME.test.ts ...
+  code $PATH_PROBFILE
+  code $PATH_TESTFILE
   ;;
 
 *) # no str?
