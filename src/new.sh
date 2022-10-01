@@ -2,13 +2,13 @@
 
 SEQ="$1"
 NAME="$2"
-FILENAME="$SEQ-$NAME"
+FILEBASENAME="$SEQ-$NAME"
 LOWERFIRSTCHAR_FILENAME=`sed 's/\(.\)/\L\1/' <<< "$NAME"`
 
 PATH_PROB="problems"
 PATH_TEST="__tests__"
-PATH_PROBFILE="$PATH_PROB/$FILENAME.ts"
-PATH_TESTFILE="$PATH_TEST/$FILENAME.test.ts"
+PATH_PROBFILE="$PATH_PROB/$FILEBASENAME.ts"
+PATH_TESTFILE="$PATH_TEST/$FILEBASENAME.test.ts"
 
 
 case "$1" in
@@ -20,11 +20,10 @@ EOF
   echo Created ~/src/$PATH_PROBFILE...
 
   cat > "$PATH_TESTFILE" <<EOF
-  import f from "../$PATH_PROBFILE";
+  import f from "../$PATH_PROB/$FILEBASENAME";
 
   describe("main", () => {
     it("core", () => {
-
     });
   });
 EOF
