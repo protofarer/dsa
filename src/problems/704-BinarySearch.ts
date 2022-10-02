@@ -5,7 +5,7 @@ export default function binarySearch(nums: number[], target: number): number {
   let midpoint: number;
   
   while (end - start >= 0) {
-    midpoint = start + Math.floor((end - start) / 2);
+    midpoint = Math.floor((end + start) / 2);
 
     // console.log(`m:${midpoint}; nums: [${nums.slice(start,end+1)}]`, )
 
