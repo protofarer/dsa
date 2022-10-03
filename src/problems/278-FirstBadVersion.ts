@@ -11,7 +11,7 @@ const solution = function(isBadVersion: any) {
         let hi = n;
 
         while (lo < hi) {
-          const m = lo + Math.floor((hi - lo) / 2);
+          const m = lo + ((hi - lo) >>> 1);
 
           if (isBadVersion(m)) {
             hi = m;
