@@ -11,6 +11,9 @@ PATH_PROBFILE="$PATH_PROBDIR/$FILEBASENAME.ts"
 PATH_TESTFILE="$PATH_TESTDIR/$FILEBASENAME.test.ts"
 
 
+# TODO ensure arg count === 2
+# TODO ensure arg1 is numeric
+
 case "$1" in
 ?*)
   cat > "$PATH_PROBFILE" <<EOF
