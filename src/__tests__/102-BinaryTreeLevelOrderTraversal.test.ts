@@ -1,4 +1,4 @@
-import { makeBinaryTreeFromList } from "../lib";
+import { makeBinaryTreeFromList } from "../lib.helper";
 import f from "../problems/102-BinaryTreeLevelOrderTraversal";
 
 describe("main", () => {

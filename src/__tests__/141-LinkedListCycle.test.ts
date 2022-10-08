@@ -1,5 +1,5 @@
 import f from "../problems/141-LinkedListCycle";
-import { LLMaker } from "../lib";
+import { LLMaker } from "../lib.helper";
 
 describe("main", () => {
   it("core", () => {

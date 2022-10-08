@@ -1,3 +1,6 @@
+/**
+ * @desc linked list
+ */
 export default function middleLinkedList(head: ListNode | null): ListNode | null {
   let curr: ListNode | null | undefined = head;
   let m = curr;

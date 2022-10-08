@@ -1,1 +1,1 @@
-- [ ] feat: new.sh option to not create test (for trivial problems)
+- [ ] feat: new.sh option to not create test (for trivial problems) "--notest"

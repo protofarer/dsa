@@ -13,3 +13,8 @@ declare type TreeNode = {
   left: TreeNode | null;
   right: TreeNode | null;
 };
+
+declare type Point = {
+  x: number,
+  y: number,
+};

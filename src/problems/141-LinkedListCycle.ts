@@ -1,3 +1,6 @@
+/**
+ * @desc linked list
+ */
 export default function linkedListCycle(head: ListNode | null): boolean {
   const visited = new Map();
   let curr = head;

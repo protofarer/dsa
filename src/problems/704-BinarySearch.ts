@@ -1,3 +1,6 @@
+/** 
+ * @desc binary search
+ */
 export default function binarySearch(nums: number[], target: number): number {
 
   let start = 0;

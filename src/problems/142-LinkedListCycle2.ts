@@ -1,3 +1,6 @@
+/**
+ * @desc linked list
+ */
 export default function linkedListCycle2(head: ListNode | null): ListNode | null {
   let tortoise = head?.next;
   let hare = head?.next?.next;

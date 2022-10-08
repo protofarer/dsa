@@ -1,3 +1,6 @@
+/**
+ * @desc binary search
+ */
 export default function mergeSortedArray(nums1: number[], m: number, nums2: number[], n: number): void {
   if (nums2.length === 0) return;
   if (nums1.length === 0) nums1[0] = 0;

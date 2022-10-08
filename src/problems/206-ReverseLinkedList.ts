@@ -1,3 +1,6 @@
+/** 
+ * @desc reverse linked list
+ */
 export default function reverseLinkedList(head: ListNode | null): ListNode | null {
   let curr: ListNode | null = head;
   let prev: ListNode | null = null;

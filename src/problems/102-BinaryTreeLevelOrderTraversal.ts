@@ -1,3 +1,7 @@
+/** 
+ * @desc binary tree, breadth first search
+ * @desc BT, BFS
+ */
 export default function binaryTreeLevelOrderTraversal(root: TreeNode | null): ((number | null)[])[]{
   // use queue
   // dequeue from queue, then queue up its children

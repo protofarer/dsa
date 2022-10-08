@@ -1,4 +1,4 @@
-import { makeBinaryTreeFromList, printBFSPath } from './lib';
+import { makeBinaryTreeFromList, printBFSPath } from './lib.helper';
 import binaryTreeLevelOrderTraversal from './problems/102-BinaryTreeLevelOrderTraversal';
 
 describe('List to Tree Transformer', () => {

@@ -1,3 +1,6 @@
+  /**
+   * @desc binary search
+   */
   export default function searchInsertPosition(nums: number[], target: number): number {
     let lo = 0;
     let hi = nums.length - 1;

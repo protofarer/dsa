@@ -1,3 +1,6 @@
+  /**
+   * @desc dynamic programming
+   */
   export default function maximumSubarray(nums: number[]): number {
     let maxSum = nums[0];
     let currSum = -Infinity;
