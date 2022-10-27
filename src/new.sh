@@ -20,7 +20,7 @@ case "$1" in
 export default function $LOWERFIRSTCHAR_FILENAME() {
 }
 EOF
-  echo Created ~/src/$PATH_PROBFILE...
+  echo Created main file ~/src/$PATH_PROBFILE...
 
   cat > "$PATH_TESTFILE" <<EOF
 import f from "../$PATH_PROBDIR/$FILEBASENAME";
@@ -30,7 +30,7 @@ describe("main", () => {
   });
 });
 EOF
-  echo Created ~/src/$PATH_TESTFILE...
+  echo Created test file ~/src/$PATH_TESTFILE...
 
   code $PATH_PROBFILE
   code $PATH_TESTFILE
