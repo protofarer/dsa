@@ -7,6 +7,20 @@ export function LLMaker(a: number[]): ListNode[] {
     return list;
 }
 
+export function LLLister(head: ListNode | null) {
+  if (!head) {
+    return null;
+  }
+
+  const list: number[] = [];
+  let curr: ListNode | null = head;
+  while (curr) {
+    list.push(curr.val);
+    curr = curr.next;
+  }
+  return list;
+}
+
 
 // TODO TreeMaker
 // given: [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
