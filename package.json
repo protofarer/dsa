@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:core": "jest --watch src/core"
   },
   "dependencies": {
     "ts-node": "^10.9.1",
@@ -12,6 +13,7 @@
   "devDependencies": {
     "@types/jest": "^29.1.0",
     "jest": "^29.1.1",
+    "prettier": "^2.8.4",
     "ts-jest": "^29.0.3"
   }
 }
