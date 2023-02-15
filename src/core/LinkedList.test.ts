@@ -1,4 +1,4 @@
-import { Node, LinkedList } from "../LinkedList";
+import { Node, LinkedList } from "./LinkedList";
 
 // TODO linked list maker, by specifying an array of values [v1, v2, v3]
 
@@ -7,10 +7,6 @@ describe("linked list", () => {
     // create empty list
     const a = new LinkedList();
     expect(a.head).toBe(null);
-
-    // create empty list
-    const b = new LinkedList([]);
-    expect(b.head).toBe(null);
   });
 
   it("instantiation errors", () => {
@@ -26,10 +22,6 @@ describe("linked list", () => {
   });
 
   it("instantiate with Array arg", () => {
-    const a = new LinkedList([]);
-    // success: empty list
-    expect(a.head).toBe(null);
-
     const b = new LinkedList([1]);
     // success: instantiate via array
     expect(b.head?.val).toBe(1);
@@ -38,6 +30,9 @@ describe("linked list", () => {
     // success: instantiate via array
     expect(c.head?.val).toBe(1);
     expect(c.head?.next?.val).toBe(2);
+
+    // fail: empty array is invalid
+    expect(() => { new LinkedList([]) }).toThrow();
   });
 
   it("insert", () => {

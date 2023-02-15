@@ -18,12 +18,13 @@ export class LinkedList<T> {
         for (let i = 1; i < initObj.length; ++i) {
           this.append(initObj[i]);
         }
+      } else {
+        // empty array was passed, likely unintentional
+        throw Error("Array must have at least one element");
       }
     } else if (initObj && (initObj.val === undefined || initObj.val === null)) {
-      // bad object was passed, probably unintentional
-      throw Error(
-        'Cannot make a LinkedList with "val" property undefined or null'
-      );
+      // bad object was passed, likely unintentional
+      throw Error('"val" property cannot be undefined or null');
     }
   }
 
@@ -127,10 +128,8 @@ export class LinkedList<T> {
     let i = 0;
     while (curr) {
       if (i === idx) {
-        if (prev)
-          prev.next = curr.next;
-        if (curr === this.head) 
-          this.head = curr.next;
+        if (prev) prev.next = curr.next;
+        if (curr === this.head) this.head = curr.next;
         curr.next = null;
         return curr;
       }
