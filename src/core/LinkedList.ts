@@ -68,7 +68,7 @@ export class LinkedList<T> {
   }
 
   // searches by value, returns node if successful
-  search(val: Node<T>["val"]): Node<T> | null {
+  search(val: T): Node<T> | null {
     if (typeof val !== "string" && typeof val !== "number")
       throw Error("Search value must be a string or number");
 
@@ -140,7 +140,7 @@ export class LinkedList<T> {
     throw Error("idx out of range");
   }
 
-  append(val: Node<T>["val"]): Node<T> | null {
+  append(val: T): Node<T> | null {
     if (!this.head) {
       this.head = { val, next: null };
       return this.head;
