@@ -166,4 +166,19 @@ export class LinkedList<T> {
 
     return list;
   }
+
+  reverse(): void {
+    if (!this.head) return;
+
+    let prev = this.head;
+    let curr: Node<T> | null | undefined = prev.next;
+    this.head.next = null;
+    while (curr) {
+      const next: Node<T> | undefined | null = curr?.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    this.head = prev;
+  }
 }

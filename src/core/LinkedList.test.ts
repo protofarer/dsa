@@ -32,7 +32,9 @@ describe("linked list", () => {
     expect(c.head?.next?.val).toBe(2);
 
     // fail: empty array is invalid
-    expect(() => { new LinkedList([]) }).toThrow();
+    expect(() => {
+      new LinkedList([]);
+    }).toThrow();
   });
 
   it("insert", () => {
@@ -168,5 +170,14 @@ describe("linked list", () => {
 
     // no-op: empty list
     expect(a.deleteByIndex(0)).toBe(null);
+  });
+
+  it("reverse", () => {
+    const a = new LinkedList([1, 2, 3, 4]);
+    a.reverse();
+    expect(a.head?.val).toBe(4);
+    expect(a.head?.next?.val).toBe(3);
+    expect(a.head?.next?.next?.val).toBe(2);
+    expect(a.head?.next?.next?.next?.val).toBe(1);
   });
 });
