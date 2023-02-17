@@ -135,7 +135,7 @@ export class DoublyLinkedList<T> {
 
   split(idx: number): DoublyLinkedList<T> | null {
     // no-op
-    if (idx <= 0 || idx >= this.length || this.length < 2) return null;
+    if (idx <= 0 || idx >= this.length - 1 || this.length < 2) return null;
 
     // head is the essential refernce to List A, uses existing list
     // node @ idx is head of List B, new list
