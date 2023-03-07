@@ -7,10 +7,11 @@ export function insertionSort(arr: number[]): number[] | null {
   while (i < arr.length) {
     let j = i - 1;
     while (j >= -1) {
-      if (j === -1) {
-        const x = arr.splice(i, 1)[0];
-        arr.splice(0, 0, x);
-      } else if (arr[i] > arr[j]) {
+      // if (j === -1) {
+      //   const x = arr.splice(i, 1)[0];
+      //   arr.splice(0, 0, x);
+      // } else
+      if (arr[i] > arr[j] || j === -1) {
         const x = arr.splice(i, 1)[0];
         arr.splice(j + 1, 0, x);
         break;
@@ -23,7 +24,7 @@ export function insertionSort(arr: number[]): number[] | null {
   return arr;
 }
 
-// in place, 2 for loops
+// in place, 2 for loops, complicated
 export function insertionSort2(arr: number[]): number[] | null {
   if (arr.length === 0) return null;
   if (arr.length === 1) return arr;
@@ -45,7 +46,7 @@ export function insertionSort2(arr: number[]): number[] | null {
   return arr;
 }
 
-// in place, assignments only (no shift)
+// in place, assignments only (no shift), more elegant
 export function insertionSort3(arr: number[]): number[] | null {
   if (arr.length === 0) return null;
   if (arr.length === 1) return arr;

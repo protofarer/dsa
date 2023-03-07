@@ -100,21 +100,21 @@ export class LinkedList<T> {
 
   // ! by reference to Node object instance itself (pointer) or by value?
   delete(searchNode: Node<T>): Node<T> | null {
-    let node: Node<T> | null = this.head;
+    let curr: Node<T> | null = this.head;
     let prev: Node<T> | null = null;
-    while (node) {
-      if (node === searchNode) {
-        if (node === this.head) {
-          this.head = node.next;
+    while (curr) {
+      if (curr === searchNode) {
+        if (curr === this.head) {
+          this.head = curr.next;
         }
         if (prev) {
-          prev.next = node.next;
+          prev.next = curr.next;
         }
-        node.next = null;
-        return node;
+        curr.next = null;
+        return curr;
       }
-      prev = node;
-      node = node.next;
+      prev = curr;
+      curr = curr.next;
     }
     return null;
   }
