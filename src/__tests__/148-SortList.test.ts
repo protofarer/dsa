@@ -1,4 +1,4 @@
-import { LLLister, LLMaker } from "../lib.helper";
+import { LLLister, LLMaker } from "../lib.bst";
 import f from "../problems/148-SortList";
 
 describe("main", () => {
