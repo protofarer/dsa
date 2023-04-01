@@ -1,8 +1,9 @@
 import { BSTNode } from "./BST";
 
 interface IHeap<T> {
-  arr: T[] | null;
-  insert: (key: T) => T | null;
+  arr: T[];
+  heapType: "max" | "min";
+  insert: (key: T) => void;
   extract: () => T | null;
   delete: () => T | null;
   peek: () => T | null;
@@ -12,7 +13,6 @@ interface IHeap<T> {
 }
 
 interface IHeapMax<T> extends IHeap<T> {
-  heapType: "max";
   max: () => T | null;
   maxHeapify: (arr: T[], idx: number) => void;
   buildMaxHeapify: (arr: T[]) => T[] | null;
@@ -25,35 +25,57 @@ interface IHeapMin<T> extends IHeap<T> {
 }
 
 export class HeapMax<T> implements IHeapMax<T> {
-  arr: T[] | null;
-  heapType: "max" = "max";
-
-  max: () => T | null = () => {
-    throw Error("max is undefined for a min heap");
-  };
+  arr: T[] = [];
+  heapType: IHeap<T>["heapType"] = "max";
 
   constructor(inputArr?: T[]) {
     if (inputArr && inputArr.length > 0) {
       // build-maxHeap logic
       this.arr = this.buildMaxHeapify(inputArr);
     } else {
-      this.arr = null;
+      this.arr = [];
     }
   }
 
-  insert(key: T): T | null {
-    return null;
+  max(): T | null {
+    return this.arr[0];
   }
 
   extract(): T | null {
-    return null;
+    if (this.arr.length === 0) throw Error("Heap underflow");
+    const max = this.max();
+    this.arr[0] = this.arr[this.arr.length - 1];
+    this.arr.pop();
+    this.maxHeapify(this.arr, 0);
+    return max;
+  }
+
+  update(idx: number, key: T): void {
+    if (key < this.arr[idx]) throw Error("New key is smaller than current key");
+    this.arr[idx] = key;
+    let i = idx;
+
+    // sifts up, restoring maxheap property
+    while (i > 0 && this.arr[this.parent(i)] < this.arr[i]) {
+      //       console.log(`i=${i} is ${this.arr[i]};
+      // p_i=${this.parent(i)} is ${this.arr[this.parent(i)]}`);
+
+      [this.arr[i], this.arr[this.parent(i)]] = [
+        this.arr[this.parent(i)],
+        this.arr[i],
+      ];
+      i = this.parent(i);
+    }
+  }
+
+  insert(key: T): void {
+    this.arr?.push(key); // though update assigns key itself, this is for type safety
+    this.update(this.arr.length - 1, key);
   }
 
   delete(): T | null {
     return null;
   }
-
-  update(i: number, key: T): void {}
 
   peek(): T | null {
     return null;
@@ -76,29 +98,41 @@ export class HeapMax<T> implements IHeapMax<T> {
   }
 
   parent(idx: number): number {
-    return Math.floor((idx + 1) / 2);
+    return Math.floor((idx + 1) / 2) - 1;
   }
 
-  buildMaxHeapify<T>(arr: T[]): T[] | null {
-    for (let i = Math.floor((arr.length - 2) / 2); i >= 0; --i) {
-      this.maxHeapify(arr, i);
+  buildMaxHeapify<T>(inputArr: T[]): T[] {
+    const arr = [...inputArr];
+    if (arr) {
+      for (let i = this.getLastNonLeafIdx(arr); i >= 0; --i) {
+        this.maxHeapify(arr, i);
+      }
     }
     return arr;
   }
 
-  maxHeapify<T>(arr: T[], i: number): void {
-    let largest = i;
-    const left = this.left(i);
-    const right = this.right(i);
+  getLastNonLeafIdx<T>(inputArr?: T[]): number {
+    const arr = inputArr || this.arr;
+    if (arr) {
+      return Math.floor((arr.length - 2) / 2);
+    }
+    return -1;
+  }
 
-    if (arr[largest] < arr[this.left(i)]) {
+  // sifts down, used for restoring maxheapproperty for given subtree
+  maxHeapify<T>(arr: T[], idx: number): void {
+    let largest = idx;
+    const left = this.left(idx);
+    const right = this.right(idx);
+
+    if (arr[largest] < arr[this.left(idx)]) {
       largest = left;
     }
-    if (arr[largest] < arr[this.right(i)]) {
+    if (arr[largest] < arr[this.right(idx)]) {
       largest = right;
     }
-    if (largest !== i) {
-      [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    if (largest !== idx) {
+      [arr[idx], arr[largest]] = [arr[largest], arr[idx]];
       this.maxHeapify(arr, largest);
     }
   }
@@ -110,10 +144,14 @@ export class HeapMax<T> implements IHeapMax<T> {
       const h = Math.floor(Math.log2(arr.length));
       for (let l = 0; l <= h; ++l) {
         const nLeadingSpaces = Math.pow(2, h - l);
-        s += `l:${l}` + " ".repeat(nLeadingSpaces);
+        s += `l:${l}` + "  ".repeat(nLeadingSpaces);
         for (let i = 0; i <= l; ++i) {
           const x = arr?.[Math.pow(2, l) + i - 1];
-          s += x >= 10 ? x + " " : " " + x + "  ";
+          s +=
+            x >= 10
+              ? x + " ".repeat(h - l + 1)
+              : " " + x + "  ".repeat(h - l + 1);
+          if (i % 2 === 1 && l > 1) s += "_";
         }
         s += "\n";
       }
