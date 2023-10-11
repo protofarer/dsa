@@ -28,7 +28,7 @@ describe("Heap", () => {
   it("update", () => {
     const a = new HeapMax([1, 5, 2, 6, 4, 3]);
     a.update(4, 7);
-    expect(a.max()).toBe(7);
+    expect(a.peek()).toBe(7);
     expect(checkHeapMaxProperty(a.arr!)).toBe(true);
 
     const b = new HeapMax([1, 5, 2, 6, 4, 3]);
@@ -45,7 +45,7 @@ describe("Heap", () => {
     const a = new HeapMax([1, 5, 2, 6, 4, 3]);
 
     a.insert(7);
-    expect(a.max()).toBe(7);
+    expect(a.peek()).toBe(7);
     expect(checkHeapMaxProperty(a.arr!)).toBe(true);
 
     a.insert(-1);
@@ -55,18 +55,16 @@ describe("Heap", () => {
     const b = new HeapMax<number>([]);
 
     b.insert(1);
-    expect(b.max()).toBe(1);
+    expect(b.peek()).toBe(1);
 
     b.insert(3);
-    expect(b.max()).toBe(3);
+    expect(b.peek()).toBe(3);
 
     b.insert(2);
-    expect(b.max()).toBe(3);
+    expect(b.peek()).toBe(3);
 
     expect(checkHeapMaxProperty(b.arr!)).toBe(true);
   });
-
-  
 });
 
 export function checkHeapMaxProperty<T>(heap: T[]): boolean {

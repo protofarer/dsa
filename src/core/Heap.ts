@@ -10,40 +10,30 @@ interface IHeap<T> {
   update: (i: number, key: T) => void;
   isEmpty: () => boolean;
   size: () => number;
-}
-
-interface IHeapMax<T> extends IHeap<T> {
-  max: () => T | null;
+  buildHeapify: (arr: T[]) => T[] | null;
   maxHeapify: (arr: T[], idx: number) => void;
-  buildMaxHeapify: (arr: T[]) => T[] | null;
 }
 
-interface IHeapMin<T> extends IHeap<T> {
-  heapType: "min";
-  min: () => T | null;
-  minHeapify: (arr: T[]) => T[] | null;
-}
-
-export class HeapMax<T> implements IHeapMax<T> {
+export class HeapMax<T> implements IHeap<T> {
   arr: T[] = [];
   heapType: IHeap<T>["heapType"] = "max";
 
   constructor(inputArr?: T[]) {
     if (inputArr && inputArr.length > 0) {
       // build-maxHeap logic
-      this.arr = this.buildMaxHeapify(inputArr);
+      this.arr = this.buildHeapify(inputArr);
     } else {
       this.arr = [];
     }
   }
 
-  max(): T | null {
+  peek(): T | null {
     return this.arr[0];
   }
 
   extract(): T | null {
     if (this.arr.length === 0) throw Error("Heap underflow");
-    const max = this.max();
+    const max = this.peek();
     this.arr[0] = this.arr[this.arr.length - 1];
     this.arr.pop();
     this.maxHeapify(this.arr, 0);
@@ -77,12 +67,8 @@ export class HeapMax<T> implements IHeapMax<T> {
     return null;
   }
 
-  peek(): T | null {
-    return null;
-  }
-
   size(): number {
-    return 0;
+    return this.arr.length;
   }
 
   isEmpty(): boolean {
@@ -101,7 +87,7 @@ export class HeapMax<T> implements IHeapMax<T> {
     return Math.floor((idx + 1) / 2) - 1;
   }
 
-  buildMaxHeapify<T>(inputArr: T[]): T[] {
+  buildHeapify<T>(inputArr: T[]): T[] {
     const arr = [...inputArr];
     if (arr) {
       for (let i = this.getLastNonLeafIdx(arr); i >= 0; --i) {
